@@ -4,19 +4,36 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-app.get('/', (request, response) => {
-   response.redirect('/index.html')
-});
-app.get('/cats', (request, response) => {
-   response.render('cats')
-});
-app.get('/cars', (request, response) => {
-   response.render('cars')
-});
-app.get('/cars/new', (request, response) => {
-   response.render('form')
+
+app.get("/cats", (req, res) => {
+   // hard-coded user data
+   var catArry = [
+       {name: "Michael", pic: "/images/cat.jpg"}, 
+       {name: "Jay", pic: "/images/cat1.jpg"}, 
+   ];
+   res.render('cats', {cats: catArry});
 });
 
+// app.get("/Michael", (req, res) => {
+//    // hard-coded user data
+//    var catArry = [
+//        {name: "Michael", pic: "/images/cat.jpg"}, 
+//        {name: "Jay", pic: "/images/cat1.jpg"}, 
+//    ];
+//    res.render('cats', {cats: catArry});
+// });
+
+app.get("/Michael", (req, res) => {
+   // hard-coded user data
+      var dets={name: "Michael",food:"spaghetti", pic: "/images/cat.jpg", age: 2, sleeping_spot : "under the bed"}
+   res.render('details', {cat: dets});
+});
+
+app.get("/Jay", (req, res) => {
+   // hard-coded user data
+      var dets={name: "jay",food:"tona", pic: "/images/cat1.jpg", age: 3, sleeping_spot : "on the sofa"}
+   res.render('details', {cat: dets});
+});
 
 
 app.use(express.static(__dirname + "/static"));
